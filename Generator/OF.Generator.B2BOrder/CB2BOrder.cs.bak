@@ -1,0 +1,280 @@
+﻿// ***********************************************************************
+// Assembly         : MB.Generator.B2BOrder
+// Author           : Peter Kraus
+// Created          : 04-14-2025
+//
+// Last Modified By : NiPeterls Kraus
+// Last Modified On : 05-04-2025
+// ***********************************************************************
+// <copyright file="CB2BOrder.cs" company="Peter Kraus IT-Dienste GmbH">
+//     Copyright © Peter Kraus IT-Dienste GmbH 2025
+// </copyright>
+// <summary>CB2BOrder.cs
+// <br>Generates B2B Order responds from OrderDictionary</summary>
+// ***********************************************************************
+using System;
+using System.Activities;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml;
+using MB.Module;
+using System.ComponentModel;
+using System.Globalization;
+using System.Xml.Linq;
+
+/// <summary>
+/// The B2BOrder namespace.
+/// </summary>
+namespace MB.Generator.B2BOrder
+{
+    /// <summary>
+    /// Class CB2BOrder. This class cannot be inherited.
+    /// Implements the <see cref="MB.Module.MBActivity" />
+    /// Implements the <see cref="MB.Module.IOFModule" />
+    /// </summary>
+    /// <seealso cref="MB.Module.MBActivity" />
+    /// <seealso cref="MB.Module.IOFModule" />
+    public sealed class CB2BOrder : MBActivity, IOFModule
+    {
+        /// <summary>
+        /// The m identifier
+        /// </summary>
+        private readonly Guid mID = new Guid("5A2D1F91-7F6B-42A8-BCC3-66296CF0AEC2");
+        /// <summary>
+        /// The m name
+        /// </summary>
+        private readonly string mName = "B2BOptic Order Generator";
+        /// <summary>
+        /// The m description
+        /// </summary>
+        private readonly string mDescription = "Build B2BOptic Order Xml";
+
+        /// <summary>
+        /// The ID of this Activity 
+        /// </summary>
+        /// <value>The identifier.</value>
+        public Guid ID
+        {
+            get { return mID; }
+        }
+
+        /// <summary>
+        /// Name of activity
+        /// </summary>
+        /// <value>The name.</value>
+        public string Name
+        {
+            get { return mName; }
+        }
+
+        /// <summary>
+        /// Gets description of activity
+        /// </summary>
+        /// <value>The description.</value>
+        public string Description
+        {
+            get { return mDescription; }
+        }
+
+        /// <summary>
+        /// The nfi
+        /// </summary>
+        private NumberFormatInfo nfi = new NumberFormatInfo();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CB2BOrder"/> class.
+        /// </summary>
+        public CB2BOrder()
+        {
+            PerfCount.Name = Name;
+        }
+
+        /// <summary>
+        /// The wfid
+        /// </summary>
+        private string wFID;
+        /// <summary>
+        /// The job count
+        /// </summary>
+        private int jobCnt = 0;
+
+        /// <summary>
+        /// Gets or sets the wfid.
+        /// </summary>
+        /// <value>The wfid.</value>
+        public InArgument<string> WFID { get; set; }
+        /// <summary>
+        /// OrderDictionary as input
+        /// </summary>
+        /// <value>The OrderDictionary.</value>
+        public InArgument<OrderDictionary> Order { get; set; }
+
+        /// <summary>
+        /// OrderResponds as output
+        /// </summary>
+        /// <value>The order responds.</value>
+        public OutArgument<string> OrderXML { get; set; }
+
+        /// <summary>
+        /// Executes the Activity
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <exception cref="OptiFlowException">At least one order needs to be defined, please check workflow and input data - null</exception>
+        protected override void Execute(NativeActivityContext context)
+        {
+            PerfCount.StartJob();
+
+            wFID = WFID.Get(context);
+            LogInfo("B2BOrderGenerator started", 1, wFID);
+            OrderDictionary dicti = Order.Get(context);
+            if (dicti == null)
+            {
+                LogError("At least one order needs to be defined, please check workflow and input data", 1, wFID);
+                throw new OptiFlowException("At least one order needs to be defined, please check workflow and input data", null) { WorkflowID = wFID };
+            }
+
+            string rsp = GenerateB2BOpticXml(dicti);
+
+            log4net.ThreadContext.Properties["Job"] = null;
+            OrderXML.Set(context, rsp);
+            PerfCount.EndJob(jobCnt);
+        }
+
+
+        private string GenerateB2BOpticXml(Dictionary<string, object> dict)
+        {
+            var b2b = new XElement("b2bOptic",
+                GenerateHeader(dict),
+                new XElement("items",
+                    new XElement("item",
+                        new XElement("referenceNo", Get(dict, "REFERENCENO")),
+                        new XElement("referenceText", Get(dict, "REFERENCETEXT")),
+                        GeneratePair(dict)
+                    )
+                )
+            );
+
+            var doc = new XDocument(new XDeclaration("1.0", "utf-8", null), b2b);
+            using (var sw = new StringWriter())
+            {
+                doc.Save(sw);
+                return sw.ToString();
+            }
+        }
+
+        private XElement GenerateHeader(Dictionary<string, object> dict)
+        {
+            return new XElement("header",
+                new XAttribute("msgType", "ORDER"),
+                new XElement("customersOrderId", Get(dict, "CUSTOMERORDERID")),
+                new XElement("distributorsOrderId", Get(dict, "SUPPLIERORDERID")),
+                new XElement("timeStamps",
+                    new XElement("dateTime",
+                        new XAttribute("step", "CREATE"),
+                        ToIsoDate(dict, "ORDERDATE")
+                    )
+                ),
+                new XElement("orderParties", new XAttribute("role", "ORIGINATOR"), new XElement("id", Get(dict, "CUSTOMERID"))),
+                new XElement("orderParties", new XAttribute("role", "SUPPLIER"), new XElement("id", Get(dict, "SUPPLIERID"))),
+                new XElement("orderParties", new XAttribute("role", "SHIPTO"), new XElement("id", Get(dict, "DELIVERYID"))),
+                new XElement("orderParties", new XAttribute("role", "PATIENT"),
+                    new XElement("name", Get(dict, "PATIENTNAME")),
+                    new XElement("gender", Get(dict, "PATIENTGENDER")),
+                    new XElement("birthDate", ToIsoDate(dict, "PATIENTBIRTH"))
+                ),
+                new XElement("software",
+                    new XAttribute("typeOf", "SENDER"),
+                    new XElement("name", "OptiFlow"),
+                    new XElement("version", "1.0")
+                ),
+                new XElement("productCatalog",
+                    new XElement("name", Get(dict, "CATALOG")),
+                    new XElement("release", "0")
+                ),
+                new XElement("portalOrderId", Get(dict, "PORTALORDERID"))
+            );
+        }
+
+        private XElement GeneratePair(Dictionary<string, object> dict)
+        {
+            var pair = new XElement("pair");
+            foreach (var side in new[] { "RIGHT", "LEFT" })
+            {
+                var suffix = side == "RIGHT" ? ".R" : ".L";
+                var lens = new XElement("lens",
+                    new XAttribute("side", side),
+                    new XAttribute("quantity", "1"),
+                    new XElement("commercialCode", Get(dict, "MATNR" + suffix)),
+                    new XElement("rxData",
+                        new XElement("sphere", ToDecimal(dict, "SPH" + suffix)),
+                        new XElement("cylinder",
+                            new XElement("power", ToDecimal(dict, "CYL" + suffix)),
+                            new XElement("axis", ToInt(dict, "AX" + suffix))
+                        )
+                    ),
+                    new XElement("centration",
+                        new XElement("monocularCentrationDistance",
+                            new XAttribute("reference", "FAR"),
+                            ToDecimal(dict, "IPD" + suffix)
+                        ),
+                        new XElement("height",
+                            new XAttribute("referenceHeight", "OVERBOX"),
+                            new XAttribute("reference", "FAR"),
+                            ToDecimal(dict, "OCHT" + suffix)
+                        )
+                    ),
+                    new XElement("geometry",
+                        new XElement("diameter",
+                            new XElement("physical", ToDecimal(dict, "DIA" + suffix))
+                        )
+                    ),
+                    new XElement("coating",
+                        new XAttribute("coatingType", "ANTIREFLEX"),
+                        new XElement("commercialCode", Get(dict, "COAT" + suffix))
+                    )
+                );
+                pair.Add(lens);
+            }
+
+            pair.Add(new XElement("frame",
+                new XAttribute("quantity", "0"),
+                new XElement("material", Get(dict, "FRAME_MATERIAL")),
+                new XElement("shape",
+                    new XElement("tracerData",
+                        new XElement("tracerType", Get(dict, "TRACERTYPE")),
+                        new XElement("tracerVersion", Get(dict, "TRACERVERSION")),
+                        new XElement("binaries", new XAttribute("format", "OMA3.02"), Get(dict, "TRACERBINARY")),
+                        new XElement("adjustion", ToDecimal(dict, "TRACERADJUSTION"))
+                    )
+                ),
+                new XElement("boxWidth", ToDecimal(dict, "HBOX")),
+                new XElement("boxHeight", ToDecimal(dict, "VBOX")),
+                new XElement("distanceBetweenLenses", ToDecimal(dict, "DBL"))
+            ));
+
+            pair.Add(new XElement("edging",
+                new XElement("edgingType", Get(dict, "EDGINGTYPE")),
+                new XElement("blocker", Get(dict, "EDGINGBLOCKER"))
+            ));
+
+            return pair;
+        }
+
+        private static string Get(Dictionary<string, object> dict, string key) =>
+            dict.TryGetValue(key, out var val) && val != null ? val.ToString() : string.Empty;
+
+        private static string ToIsoDate(Dictionary<string, object> dict, string key) =>
+            DateTime.TryParse(Get(dict, key), out var dt) ? dt.ToString("s") : string.Empty;
+
+        private static string ToDecimal(Dictionary<string, object> dict, string key) =>
+            decimal.TryParse(Get(dict, key), NumberStyles.Any, CultureInfo.InvariantCulture, out var val) ? val.ToString(CultureInfo.InvariantCulture) : string.Empty;
+
+        private static string ToInt(Dictionary<string, object> dict, string key) =>
+            int.TryParse(Get(dict, key), out var val) ? val.ToString() : string.Empty;
+    }
+
+}
+

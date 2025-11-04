@@ -1,0 +1,506 @@
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Field Name</th>
+      <th>Data Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ACCN</td>
+      <td>text</td>
+      <td>Account number</td>
+    </tr>
+    <tr>
+      <td>ADD.L</td>
+      <td>numeric;</td>
+      <td>Addition power if multifocal, progressive or executive type lens. (diopters) Value for the left eye.</td>
+    </tr>
+    <tr>
+      <td>ADD.R</td>
+      <td>numeric;</td>
+      <td>Addition power if multifocal, progressive or executive type lens. (diopters) Value for the right eye.</td>
+    </tr>
+    <tr>
+      <td>AX.L</td>
+      <td>numeric;</td>
+      <td>Prescribed\n  cylinder axis. May be 0 - 180. (degrees) Notice that this\n  may be different from GAX which is generator AXIS. Value for the left eye.</td>
+    </tr>
+    <tr>
+      <td>AX.R</td>
+      <td>numeric;</td>
+      <td>Prescribed\n  cylinder axis. May be 0 - 180. (degrees) Notice that this\n  may be different from GAX which is generator AXIS. Value for the right eye.</td>
+    </tr>
+    <tr>
+      <td>BEVM</td>
+      <td>numeric;</td>
+      <td>Bevel modifier. Percentage or distance in mm based on\n  value of BEVP. Percentage should be expressed\n  as a number between 0 and 100.</td>
+    </tr>
+    <tr>
+      <td>BEVP</td>
+      <td>integer[ ;]</td>
+      <td>Bevel position 0 Manual 1 Follow front (BEVM = mm\n  from front) 2 Percent back (BEVM = %\n  from front) 3 Frame curve (BEVC = curve\n  to follow, BEVM = mm from front) 4 - 50/50 5 - Follow back (BEVM = mm\n  from back) 6, 8, 9 - Unused 7\n   Automatic (Use edger settings) (If HICRV=1, use BEVH,\n  BTILT, TILTBASE records) 10 - Free float</td>
+    </tr>
+    <tr>
+      <td>BVD.L</td>
+      <td>numeric;</td>
+      <td>Back vertex distance, as worn (mm). Value for the left eye.</td>
+    </tr>
+    <tr>
+      <td>BVD.R</td>
+      <td>numeric;</td>
+      <td>Back vertex distance, as worn (mm). Value for the right eye.</td>
+    </tr>
+    <tr>
+      <td>CLIENT</td>
+      <td>text</td>
+      <td>Wearers full or last name (surname).</td>
+    </tr>
+    <tr>
+      <td>CORRLEN.L</td>
+      <td>numeric[ ;]</td>
+      <td>Nominal Corridor Length (mm). Value for the left eye.</td>
+    </tr>
+    <tr>
+      <td>CORRLEN.R</td>
+      <td>numeric[ ;]</td>
+      <td>Nominal Corridor Length (mm). Value for the right eye.</td>
+    </tr>
+    <tr>
+      <td>CRIB.L</td>
+      <td>numeric;</td>
+      <td>Crib diameter\n  (mm). A value of zero (0) will mean no cribbing. A positive value will mean\n  the crib diameter, a negative value will mean the take off amount (from blank diameter) intended for\n  touching up uncut lenses. Value for the left eye.</td>
+    </tr>
+    <tr>
+      <td>CRIB.R</td>
+      <td>numeric;</td>
+      <td>Crib diameter\n  (mm). A value of zero (0) will mean no cribbing. A positive value will mean\n  the crib diameter, a negative value will mean the take off amount (from blank diameter) intended for\n  touching up uncut lenses. Value for the right eye.</td>
+    </tr>
+    <tr>
+      <td>CYL.L</td>
+      <td>String</td>
+      <td>Non-standard field (not in DCS Table A.1). Meaning defined by OptiFlow logic.</td>
+    </tr>
+    <tr>
+      <td>CYL.R</td>
+      <td>String</td>
+      <td>Non-standard field (not in DCS Table A.1). Meaning defined by OptiFlow logic.</td>
+    </tr>
+    <tr>
+      <td>DBL</td>
+      <td>String</td>
+      <td>Non-standard field (not in DCS Table A.1). Meaning defined by OptiFlow logic.</td>
+    </tr>
+    <tr>
+      <td>ENGMARK</td>
+      <td></td>
+      <td>See section 5.15.1 for a description of this record.</td>
+    </tr>
+    <tr>
+      <td>ETYP</td>
+      <td>integer</td>
+      <td>Type of edge to cut on lens: -1 - Uncut 1 Bevel (V shown in Figure A.8) 2 Rimless (Flat shown in Figure A.8) 3 Groove 4 Mini-bevel (a smaller-than-\n  traditional V) 5 T bevel (see Figure A.8)</td>
+    </tr>
+    <tr>
+      <td>ETYP.L</td>
+      <td>integer</td>
+      <td>Type of edge to cut on lens: -1 - Uncut 1 Bevel (V shown in Figure A.8) 2 Rimless (Flat shown in Figure A.8) 3 Groove 4 Mini-bevel (a smaller-than-\n  traditional V) 5 T bevel (see Figure A.8) Value for the left eye.</td>
+    </tr>
+    <tr>
+      <td>ETYP.R</td>
+      <td>integer</td>
+      <td>Type of edge to cut on lens: -1 - Uncut 1 Bevel (V shown in Figure A.8) 2 Rimless (Flat shown in Figure A.8) 3 Groove 4 Mini-bevel (a smaller-than-\n  traditional V) 5 T bevel (see Figure A.8) Value for the right eye.</td>
+    </tr>
+    <tr>
+      <td>EXT/NearObjectDistance</td>
+      <td>String</td>
+      <td>Non-standard field (not in DCS Table A.1). Meaning defined by OptiFlow logic.</td>
+    </tr>
+    <tr>
+      <td>FCRV.L</td>
+      <td>numeric [;]</td>
+      <td>Frame curve (TIND diopters). Value for the left eye.</td>
+    </tr>
+    <tr>
+      <td>FCRV.R</td>
+      <td>numeric [;]</td>
+      <td>Frame curve (TIND diopters). Value for the right eye.</td>
+    </tr>
+    <tr>
+      <td>FMAT</td>
+      <td>text</td>
+      <td>Material of frame. (e.g., METL)</td>
+    </tr>
+    <tr>
+      <td>FTYP</td>
+      <td>integer</td>
+      <td>Integer frame type. 0 Undefined 1 Plastic 2 Metal 3 Rimless 4 Optyl 5..127 reserved</td>
+    </tr>
+    <tr>
+      <td>FTYP.L</td>
+      <td>integer</td>
+      <td>Integer frame type. 0 Undefined 1 Plastic 2 Metal 3 Rimless 4 Optyl 5..127 reserved Value for the left eye.</td>
+    </tr>
+    <tr>
+      <td>FTYP.R</td>
+      <td>integer</td>
+      <td>Integer frame type. 0 Undefined 1 Plastic 2 Metal 3 Rimless 4 Optyl 5..127 reserved Value for the right eye.</td>
+    </tr>
+    <tr>
+      <td>GROOVEDEPTH.L</td>
+      <td>String</td>
+      <td>Non-standard field (not in DCS Table A.1). Meaning defined by OptiFlow logic.</td>
+    </tr>
+    <tr>
+      <td>GROOVEDEPTH.R</td>
+      <td>String</td>
+      <td>Non-standard field (not in DCS Table A.1). Meaning defined by OptiFlow logic.</td>
+    </tr>
+    <tr>
+      <td>GROOVEWIDTH.L</td>
+      <td>String</td>
+      <td>Non-standard field (not in DCS Table A.1). Meaning defined by OptiFlow logic.</td>
+    </tr>
+    <tr>
+      <td>GROOVEWIDTH.R</td>
+      <td>String</td>
+      <td>Non-standard field (not in DCS Table A.1). Meaning defined by OptiFlow logic.</td>
+    </tr>
+    <tr>
+      <td>HBOX.L</td>
+      <td>numeric [;]</td>
+      <td>Horizontal boxed lens size of frame (mm). Value for the left eye.</td>
+    </tr>
+    <tr>
+      <td>HBOX.R</td>
+      <td>numeric [;]</td>
+      <td>Horizontal boxed lens size of frame (mm). Value for the right eye.</td>
+    </tr>
+    <tr>
+      <td>IPD.L</td>
+      <td>numeric;</td>
+      <td>Monocular centration distance (mm) Value for the left eye.</td>
+    </tr>
+    <tr>
+      <td>IPD.R</td>
+      <td>numeric;</td>
+      <td>Monocular centration distance (mm) Value for the right eye.</td>
+    </tr>
+    <tr>
+      <td>JOB</td>
+      <td>String</td>
+      <td>Non-standard field (not in DCS Table A.1). Meaning defined by OptiFlow logic.</td>
+    </tr>
+    <tr>
+      <td>LCOAT.L</td>
+      <td>String</td>
+      <td>Non-standard field (not in DCS Table A.1). Meaning defined by OptiFlow logic.</td>
+    </tr>
+    <tr>
+      <td>LCOAT.R</td>
+      <td>String</td>
+      <td>Non-standard field (not in DCS Table A.1). Meaning defined by OptiFlow logic.</td>
+    </tr>
+    <tr>
+      <td>OCHT.L</td>
+      <td>numeric;</td>
+      <td>Vertical Prism Reference Point height\n  measured from the (frame) lower boxed tangent Value for the left eye.</td>
+    </tr>
+    <tr>
+      <td>OCHT.R</td>
+      <td>numeric;</td>
+      <td>Vertical Prism Reference Point height\n  measured from the (frame) lower boxed tangent Value for the right eye.</td>
+    </tr>
+    <tr>
+      <td>POLISH</td>
+      <td>integer</td>
+      <td>Polishing mode. 0 = no polish, 1 = polish edge and pin bevels. 2 = polish pin bevels only. 3 = polish edge only. +128 indicates high luster.</td>
+    </tr>
+    <tr>
+      <td>POLISH.L</td>
+      <td>integer</td>
+      <td>Polishing mode. 0 = no polish, 1 = polish edge and pin bevels. 2 = polish pin bevels only. 3 = polish edge only. +128 indicates high luster. Value for the left eye.</td>
+    </tr>
+    <tr>
+      <td>POLISH.R</td>
+      <td>integer</td>
+      <td>Polishing mode. 0 = no polish, 1 = polish edge and pin bevels. 2 = polish pin bevels only. 3 = polish edge only. +128 indicates high luster. Value for the right eye.</td>
+    </tr>
+    <tr>
+      <td>PRVA.L</td>
+      <td>numeric;</td>
+      <td>Rx Prism base setting, 0 360 (degrees). Value for the left eye.</td>
+    </tr>
+    <tr>
+      <td>PRVA.R</td>
+      <td>numeric;</td>
+      <td>Rx Prism base setting, 0 360 (degrees). Value for the right eye.</td>
+    </tr>
+    <tr>
+      <td>PRVM.L</td>
+      <td>numeric;</td>
+      <td>Rx Prism in diopters, including equithinning prism to inspect at Value for the left eye.</td>
+    </tr>
+    <tr>
+      <td>PRVM.R</td>
+      <td>numeric;</td>
+      <td>Rx Prism in diopters, including equithinning prism to inspect at Value for the right eye.</td>
+    </tr>
+    <tr>
+      <td>PairOrders</td>
+      <td>String</td>
+      <td>Non-standard field (not in DCS Table A.1). Meaning defined by OptiFlow logic.</td>
+    </tr>
+    <tr>
+      <td>REM</td>
+      <td>String</td>
+      <td>Non-standard field (not in DCS Table A.1). Meaning defined by OptiFlow logic.</td>
+    </tr>
+    <tr>
+      <td>SBEV.L</td>
+      <td>numeric;</td>
+      <td>Generator safety bevel depth (in Z plane) to cut (mm). Value for the left eye.</td>
+    </tr>
+    <tr>
+      <td>SBEV.R</td>
+      <td>numeric;</td>
+      <td>Generator safety bevel depth (in Z plane) to cut (mm). Value for the right eye.</td>
+    </tr>
+    <tr>
+      <td>SEGHT.L</td>
+      <td>numeric;</td>
+      <td>Layout\n  Reference Point height measured from the LRP center to the lower horizontal element of a box circumscribing the shape. Value for the left eye.</td>
+    </tr>
+    <tr>
+      <td>SEGHT.R</td>
+      <td>numeric;</td>
+      <td>Layout\n  Reference Point height measured from the LRP center to the lower horizontal element of a box circumscribing the shape. Value for the right eye.</td>
+    </tr>
+    <tr>
+      <td>SPH.L</td>
+      <td>numeric;</td>
+      <td>Rx Sphere power (diopters) Value for the left eye.</td>
+    </tr>
+    <tr>
+      <td>SPH.R</td>
+      <td>numeric;</td>
+      <td>Rx Sphere power (diopters) Value for the right eye.</td>
+    </tr>
+    <tr>
+      <td>VBOX.L</td>
+      <td>numeric[ ;]</td>
+      <td>Vertical boxed lens size (mm) Value for the left eye.</td>
+    </tr>
+    <tr>
+      <td>VBOX.R</td>
+      <td>numeric[ ;]</td>
+      <td>Vertical boxed lens size (mm) Value for the right eye.</td>
+    </tr>
+    <tr>
+      <td>ZTILT.L</td>
+      <td>String</td>
+      <td>Non-standard field (not in DCS Table A.1). Meaning defined by OptiFlow logic.</td>
+    </tr>
+    <tr>
+      <td>ZTILT.R</td>
+      <td>String</td>
+      <td>Non-standard field (not in DCS Table A.1). Meaning defined by OptiFlow logic.</td>
+    </tr>
+    <tr>
+      <td>_BEVPOS</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_CHAMFER</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_CNTRYCODE</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_COMMISSION1</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_COMMISSION2</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_CTO.L</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_CTO.R</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_CUSTSOFTWARE</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_DSGNTYPE.L</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_DSGNTYPE.R</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_FRMMAT</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_HBOXNOM</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_JOB</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_LENSID.L</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_LENSID.R</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_OMASTD</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_PRVA2.L</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_PRVA2.R</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_PRVM2.L</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_PRVM2.R</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_QTY.L</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_QTY.R</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_SALESID</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_SGNRIN.L</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_SGNRIN.R</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_SHIPTOID</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_SHOPADDR1</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_SHOPADDR2</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_SHOPCITY</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_SHOPCOUNTRY</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_SHOPNAM</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_SHOPNO</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_SHOPPHONE</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_SHOPZIP</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_SKIPJOB</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_STORELOCAL</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>_VBOXNOM</td>
+      <td>String</td>
+      <td>Custom OptiFlow internal field, used for control or routing.</td>
+    </tr>
+    <tr>
+      <td>frameStatus</td>
+      <td>String</td>
+      <td>Non-standard field (not in DCS Table A.1). Meaning defined by OptiFlow logic.</td>
+    </tr>
+    <tr>
+      <td>test</td>
+      <td>String</td>
+      <td>Non-standard field (not in DCS Table A.1). Meaning defined by OptiFlow logic.</td>
+    </tr>
+  </tbody>
+</table>

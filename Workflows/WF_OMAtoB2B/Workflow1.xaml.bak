@@ -1,0 +1,239 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="WF_B2BtoOMA.Workflow1" sap2010:ExpressionActivityEditor.ExpressionActivityEditor="C#" sap2010:WorkflowViewState.IdRef="WF_B2BtoOMA.Workflow1_1"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities"
+ xmlns:oag="clr-namespace:OF.Adapter.GetFTP;assembly=OF.Adapter.GetFTP"
+ xmlns:oas="clr-namespace:OF.Adapter.SendFTP;assembly=OF.Adapter.SendFTP"
+ xmlns:ogb="clr-namespace:OF.Generator.B2BOrder;assembly=OF.Generator.B2BOrder"
+ xmlns:om="clr-namespace:OF.Module;assembly=OF.Module"
+ xmlns:opv="clr-namespace:OF.Parser.VCA;assembly=OF.Parser.VCA"
+ xmlns:otr="clr-namespace:OF.Transformation.RuleEngine;assembly=OF.Transformation.RuleEngine"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>OF.Transformation.RuleEngine</x:String>
+      <x:String>OF.Module</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>log4net</AssemblyReference>
+      <AssemblyReference>Microsoft.CodeAnalysis</AssemblyReference>
+      <AssemblyReference>Microsoft.CodeAnalysis.CSharp</AssemblyReference>
+      <AssemblyReference>Microsoft.CodeAnalysis.CSharp.Scripting</AssemblyReference>
+      <AssemblyReference>Microsoft.CodeAnalysis.Scripting</AssemblyReference>
+      <AssemblyReference>Microsoft.CSharp</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.AppContext</AssemblyReference>
+      <AssemblyReference>System.Buffers</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Configuration</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.FileVersionInfo</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.StackTrace</AssemblyReference>
+      <AssemblyReference>System.IO</AssemblyReference>
+      <AssemblyReference>System.IO.Compression</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.Primitives</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Numerics</AssemblyReference>
+      <AssemblyReference>System.Numerics.Vectors</AssemblyReference>
+      <AssemblyReference>System.Reflection</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Runtime</AssemblyReference>
+      <AssemblyReference>System.Runtime.CompilerServices.Unsafe</AssemblyReference>
+      <AssemblyReference>System.Runtime.Extensions</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography.Algorithms</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography.Encoding</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography.Primitives</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography.X509Certificates</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Text.Encoding.CodePages</AssemblyReference>
+      <AssemblyReference>System.Threading.Tasks.Extensions</AssemblyReference>
+      <AssemblyReference>System.Threading.Thread</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Web</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>System.Xml.ReaderWriter</AssemblyReference>
+      <AssemblyReference>System.Xml.XmlDocument</AssemblyReference>
+      <AssemblyReference>System.Xml.XPath</AssemblyReference>
+      <AssemblyReference>System.Xml.XPath.XDocument</AssemblyReference>
+      <AssemblyReference>OF.Parser.VCA</AssemblyReference>
+      <AssemblyReference>OF.Transformation.RuleEngine</AssemblyReference>
+      <AssemblyReference>OF.Module</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>OF.Adapter.GetFTP</AssemblyReference>
+      <AssemblyReference>OF.Adapter.SendFTP</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>OF.Generator.B2BOrder</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>WF_B2BtoOMA</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="otr:ScriptStore" Name="ScriptStore" />
+      <Variable x:TypeArguments="om:OrderDictionary" Name="dicti">
+        <Variable.Default>
+          <mca:CSharpValue x:TypeArguments="om:OrderDictionary">new OrderDictionary()</mca:CSharpValue>
+        </Variable.Default>
+      </Variable>
+      <Variable x:TypeArguments="x:Int32" Default="1" Name="NoOfItems" />
+    </Sequence.Variables>
+    <DoWhile sap2010:WorkflowViewState.IdRef="DoWhile_1">
+      <DoWhile.Condition>
+        <mca:CSharpValue x:TypeArguments="x:Boolean">NoOfItems&gt;0</mca:CSharpValue>
+      </DoWhile.Condition>
+      <Sequence sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="x:String" Name="filename" />
+          <Variable x:TypeArguments="x:String" Name="message" />
+          <Variable x:TypeArguments="x:String" Name="MID" />
+        </Sequence.Variables>
+        <oag:GetFTP MID="{x:Null}" FTPServer="ftp://preislistendruck.de" sap2010:WorkflowViewState.IdRef="GetFTP_1" MsgExtension="VCA" Password="flow!1Opti" RenameWhenDone="bak" Username="OptiFlow" WFID="TEST">
+          <oag:GetFTP.Filename>
+            <OutArgument x:TypeArguments="x:String">
+              <mca:CSharpReference x:TypeArguments="x:String">filename</mca:CSharpReference>
+            </OutArgument>
+          </oag:GetFTP.Filename>
+          <oag:GetFTP.Message>
+            <OutArgument x:TypeArguments="x:String">
+              <mca:CSharpReference x:TypeArguments="x:String">message</mca:CSharpReference>
+            </OutArgument>
+          </oag:GetFTP.Message>
+          <oag:GetFTP.Result>
+            <OutArgument x:TypeArguments="x:Int32">
+              <mca:CSharpReference x:TypeArguments="x:Int32">NoOfItems</mca:CSharpReference>
+            </OutArgument>
+          </oag:GetFTP.Result>
+          <oag:GetFTP.Subdir>
+            <InArgument x:TypeArguments="x:String">
+              <Literal x:TypeArguments="x:String" Value="" />
+            </InArgument>
+          </oag:GetFTP.Subdir>
+        </oag:GetFTP>
+        <If sap2010:WorkflowViewState.IdRef="If_1">
+          <If.Condition>
+            <InArgument x:TypeArguments="x:Boolean">
+              <mca:CSharpValue x:TypeArguments="x:Boolean">NoOfItems &gt;0</mca:CSharpValue>
+            </InArgument>
+          </If.Condition>
+          <If.Then>
+            <Sequence sap2010:WorkflowViewState.IdRef="Sequence_2">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="x:String" Name="b2bxml" />
+              </Sequence.Variables>
+              <opv:CVCAParser sap2010:WorkflowViewState.IdRef="CVCAParser_1" WFID="test">
+                <opv:CVCAParser.MsgID>
+                  <InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String">filename</mca:CSharpValue>
+                  </InArgument>
+                </opv:CVCAParser.MsgID>
+                <opv:CVCAParser.OMAMsg>
+                  <InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String">message</mca:CSharpValue>
+                  </InArgument>
+                </opv:CVCAParser.OMAMsg>
+                <opv:CVCAParser.Order>
+                  <OutArgument x:TypeArguments="om:OrderDictionary">
+                    <mca:CSharpReference x:TypeArguments="om:OrderDictionary">dicti</mca:CSharpReference>
+                  </OutArgument>
+                </opv:CVCAParser.Order>
+              </opv:CVCAParser>
+              <otr:RuleEngine ConnectionString="{x:Null}" MappingFiles="{x:Null}" sap2010:WorkflowViewState.IdRef="RuleEngine_2" RuleFile="Rules.cs" WFID="TEST">
+                <otr:RuleEngine.Dicti>
+                  <InOutArgument x:TypeArguments="om:OrderDictionary">
+                    <mca:CSharpReference x:TypeArguments="om:OrderDictionary">dicti</mca:CSharpReference>
+                  </InOutArgument>
+                </otr:RuleEngine.Dicti>
+                <otr:RuleEngine.ScriptObj>
+                  <InOutArgument x:TypeArguments="otr:ScriptStore">
+                    <mca:CSharpReference x:TypeArguments="otr:ScriptStore">ScriptStore</mca:CSharpReference>
+                  </InOutArgument>
+                </otr:RuleEngine.ScriptObj>
+              </otr:RuleEngine>
+              <ogb:CB2BOrder sap2010:WorkflowViewState.IdRef="CB2BOrder_1" WFID="test">
+                <ogb:CB2BOrder.Order>
+                  <InArgument x:TypeArguments="om:OrderDictionary">
+                    <mca:CSharpValue x:TypeArguments="om:OrderDictionary">dicti</mca:CSharpValue>
+                  </InArgument>
+                </ogb:CB2BOrder.Order>
+                <ogb:CB2BOrder.OrderXML>
+                  <OutArgument x:TypeArguments="x:String">
+                    <mca:CSharpReference x:TypeArguments="x:String">b2bxml</mca:CSharpReference>
+                  </OutArgument>
+                </ogb:CB2BOrder.OrderXML>
+              </ogb:CB2BOrder>
+              <oas:SendFTP Subdir="{x:Null}" FTPServer="ftp://preislistendruck.de" sap2010:WorkflowViewState.IdRef="SendFTP_1" Password="flow!1Opti" Username="optiflow" WFID="TEST">
+                <oas:SendFTP.Filename>
+                  <InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String">filename + ".xml"</mca:CSharpValue>
+                  </InArgument>
+                </oas:SendFTP.Filename>
+                <oas:SendFTP.Message>
+                  <InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String">b2bxml</mca:CSharpValue>
+                  </InArgument>
+                </oas:SendFTP.Message>
+              </oas:SendFTP>
+            </Sequence>
+          </If.Then>
+        </If>
+      </Sequence>
+    </DoWhile>
+    <sads:DebugSymbol.Symbol>d0NDOlxVc2Vyc1xFbnR3aVxzb3VyY2VccmVwb3NcSVRLLk9wdGlGbG93XFdGX0IyQnRvT01BXFdvcmtmbG93MS54YW1sKV0DzQEOAgEBYgtiaAIBA2UzZTYCAQJnBcsBDwIBB2kJaVYDAYMBawfKARICAQhxCYYBFgIBZocBCckBDgIBCXGtAXGyAQMBggFxLnFJAwGBAYMBD4MBPgMBgAF5D3lcAgF5cYIBcYcBAgF4dA90XQIBcXG8AXHGAQIBcH4Pfl0CAWlxkQFxnQECAWhxzAFx0gECAWeKAQ+KAV0CAQqOAQ3HARgCARGSAQ+iASACAUyjAQ+uASACATmvAQ+6AR8CASe7AQ/GAR0CARKVARWVAVsCAV6fARWfAWoCAVaaARWaAVoCAU6SAVOSAVkCAU2jAYsBowGVAQIBS6sBFasBbQIBQ6YBFaYBagIBO6MBmwGjAaEBAgE6twEVtwFhAgExsgEVsgFiAgEprwFRrwFXAgEouwE4uwFTAgEmwwEVwwFZAgEevgEVvgFkAgEWuwGfAbsBqQECARW7AYkBuwGVAQIBFLsBrwG7AbUBAgET</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="GetFTP_1" sap:VirtualizedContainerService.HintSize="464,22" />
+      <sap2010:ViewStateData Id="CVCAParser_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="RuleEngine_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="CB2BOrder_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="SendFTP_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="222,332">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="464,484" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="486,670">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="DoWhile_1" sap:VirtualizedContainerService.HintSize="512,836" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="534,960">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WF_B2BtoOMA.Workflow1_1" sap:VirtualizedContainerService.HintSize="574,1040" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>
