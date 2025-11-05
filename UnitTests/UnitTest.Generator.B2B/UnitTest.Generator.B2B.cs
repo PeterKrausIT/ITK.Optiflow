@@ -99,6 +99,9 @@ namespace UnitTestB2BOrder
             Order.SetValue("ACOAT.R", "HVLL");
             Order.SetValue("COLR", "BLUE");
             Order.SetValue("HBOX.R", (decimal)54.0);
+            Order.SetValue("MINEDG", (decimal)0.8);
+            Order.SetValue("MINEDG.R", (decimal)0.8);
+            Order.SetValue("MINEDG.L", (decimal)0.8);
             Order.SetValue("DESTID", (string)"000001");
             Order.SetValue("NWD", (decimal)42.0);
             Order.SetValue("REM", "Priority!");
