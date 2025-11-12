@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WF_OMAtoB2B.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="FTP_Server" Type="System.String" Scope="User">
+      <Value Profile="(Default)">188.68.49.99</Value>
+    </Setting>
+    <Setting Name="FTP_User" Type="System.String" Scope="User">
+      <Value Profile="(Default)">optiflow</Value>
+    </Setting>
+    <Setting Name="FTP_Password" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Optiflow</Value>
+    </Setting>
+    <Setting Name="FTP_InDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)">OMA</Value>
+    </Setting>
+    <Setting Name="FTP_OutDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)">XML</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

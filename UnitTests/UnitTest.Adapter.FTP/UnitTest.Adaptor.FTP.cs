@@ -55,7 +55,7 @@ namespace UnitTestFTPAdapter
             {
                 { "FTPServer", "ftp://preislistendruck.de" },
                 { "Username", "OptiFlow" },
-                { "Password", "flow!1Opti" },
+                { "Password", "flow!11Opti" },
                 { "Message", "This is just a test file." },
                 { "Filename", filename1 },
                 {"Subdir", "" }
@@ -65,7 +65,7 @@ namespace UnitTestFTPAdapter
             {
                 { "FTPServer", "ftp://preislistendruck.de" },
                 { "Username", "OptiFlow" },
-                { "Password", "flow!1Opti" },
+                { "Password", "flow!11Opti" },
                 { "Message", "This is just a test file." },
                 { "Filename", filename2 },
                 {"Subdir", "" }
@@ -78,7 +78,7 @@ namespace UnitTestFTPAdapter
             {
                 { "FTPServer", "ftp://Preislistendruck.de" },
                 { "Username", "OptiFlow" },
-                { "Password", "flow!1Opti" },
+                { "Password", "flow!11Opti" },
                 { "MsgExtension", "TST" },
                 { "RenameWhenDone", "BAK" }
             };
@@ -98,7 +98,7 @@ namespace UnitTestFTPAdapter
             {
                 { "FTPServer", "ftp://Preislistendruck.de" },
                 { "Username", "OptiFlow" },
-                { "Password", "flow!1Opti" },
+                { "Password", "flow!11Opti" },
                 { "MsgExtension", "TST" },
                 { "RenameWhenDone", "BAK" }
             };
@@ -134,7 +134,7 @@ namespace UnitTestFTPAdapter
             {
                 { "FTPServer", "ftp://Preislistendruck" },
                 { "Username", "OptiFlow" },
-                { "Password", "flow!1Opti" },
+                { "Password", "flow!11Opti" },
                 { "Message", "This is just a test file." },
                 { "Filename", filename1 },
                 {"Subdir", "" }

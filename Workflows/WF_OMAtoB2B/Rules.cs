@@ -83,9 +83,63 @@ namespace TEMPO
                         }
                         od.SetValue("_EDGINGTYPE", edgingtype);
 
+            // replace lens code (LNAM) according this schema:
+            /*
+            ORDEREDFRAME_PAL_SPORT	PA4000	Gleitsichtglas	Polycarbonat	1.59	CSTPC50   00
+            GIVENFRAME_SV_SPORT	PP2400	Einstärkenglas	Trivex	1.53	CSTSC50   00
+            ORDEREDFRAME_BIFO	087000	Bifokalglas	Mineral	1.50	CSTBM50   00
+            ORDEREDFRAME_SV	012000	Einstärkenglas	Mineral	1.80	CSTSM50   00
+            GIVENFRAME_PAL	ZS330U	Gleitsichtglas	Kunststoff	1.60	CSTPC50   00
+             */
+            string lnam = od.ContainsKey("LNAM.R") ? od["LNAM.R"].ToString().ToUpper() : "";
+            od.SetValue("_orgLNAM.R", lnam); // default to itself
+            switch (lnam)
+            {
+                case "PA4000" // "ORDEREDFRAME_PAL_SPORT":
+                    od.SetValue("LNAM.R", "CSTPC50");
+                    break;
+                case "PP2400" // "GIVENFRAME_SV_SPORT":
+                    od.SetValue("LNAM.R", "CSTSC50");
+                    break;
+                case "087000" // "ORDEREDFRAME_BIFO":
+                    od.SetValue("LNAM.R", "CSTBM50");
+                    break;
+                case "012000" // "ORDEREDFRAME_SV":
+                    od.SetValue("LNAM.R", "CSTSM50");
+                    break;
+                case "ZS330U" // "GIVENFRAME_PAL":
+                    od.SetValue("LNAM.R", "CSTPC50");
+                    break;
+                default:
+                    // do nothing
+                    break;
+            }
+            lnam = od.ContainsKey("LNAM.L") ? od["LNAM.L"].ToString().ToUpper() : "";
+            od.SetValue("_orgLNAM.L", lnam); // default to itself
+            switch (lnam)
+            {
+                case "PA4000" // "ORDEREDFRAME_PAL_SPORT":
+                    od.SetValue("LNAM.L", "CSTPC50");
+                    break;
+                case "PP2400" // "GIVENFRAME_SV_SPORT":
+                    od.SetValue("LNAM.L", "CSTSC50");
+                    break;
+                case "087000" // "ORDEREDFRAME_BIFO":
+                    od.SetValue("LNAM.L", "CSTBM50");
+                    break;
+                case "012000" // "ORDEREDFRAME_SV":
+                    od.SetValue("LNAM.L", "CSTSM50");
+                    break;
+                case "ZS330U" // "GIVENFRAME_PAL":
+                    od.SetValue("LNAM.L", "CSTPC50");
+                    break;
+                default:
+                    // do nothing
+                    break;
+            }
 
-                    }
-                    catch (System.Exception exx)
+        }
+        catch (System.Exception exx)
                                 {
                                     System.Console.WriteLine(exx.ToString());
                                     od.SetValue("_ERROR", exx.ToString());

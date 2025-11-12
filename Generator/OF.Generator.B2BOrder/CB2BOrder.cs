@@ -186,7 +186,7 @@ namespace OF.Generator.B2BOrder
             );
 
             var doc = new XDocument(new XDeclaration("1.0", "utf-8", null), b2b);
-            using (var sw = new StringWriter())
+            using (var sw = new StringWriter(CultureInfo.InvariantCulture))
             {
                 doc.Save(sw);
                 return sw.ToString();
@@ -304,6 +304,8 @@ namespace OF.Generator.B2BOrder
                 var sphere = ElemIf("sphere", ToDecimal(dict, "SPH" + suffix));
                 if (sphere != null)
                     rxData.Add(sphere);
+                LogInfo(dict["SPH.R"].ToString(), 999, "test");
+                LogInfo(sphere, 999, "test");
 
                 var power = ElemIf("power", ToDecimal(dict, "CYL" + suffix));
                 var axis = ElemIf("axis", ToInt(dict, "AX" + suffix));
@@ -689,7 +691,8 @@ namespace OF.Generator.B2BOrder
         /// <param name="dict">The dictionary to retrieve the value from.</param>
         /// <param name="key">The key of the value to retrieve.</param>
         /// <returns>The string value if found; otherwise, an empty string.</returns>
-        private static string Get(Dictionary<string, object> dict, string key) =>
+        private static string Get(Dictionary<string, object> dict, string key) 
+            =>
             dict.TryGetValue(key, out var val) && val != null ? val.ToString() : string.Empty;
 
         /// <summary>
@@ -698,8 +701,37 @@ namespace OF.Generator.B2BOrder
         /// <param name="dict">The dictionary to retrieve the value from.</param>
         /// <param name="key">The key of the value to retrieve.</param>
         /// <returns>The decimal value if found and parseable; otherwise, 0.</returns>
-        private static decimal GetDecimal(Dictionary<string, object> dict, string key) =>
-            decimal.TryParse(Get(dict, key), NumberStyles.Any, CultureInfo.InvariantCulture, out var val) ? val : 0m;
+        private static decimal GetDecimal(Dictionary<string, object> dict, string key) { 
+            
+            if (dict.TryGetValue(key, out var val) && val != null)
+            {
+                if (val is decimal decVal)
+                    return decVal;
+                if (val is double dblVal)
+                    return (decimal)dblVal;
+                if (val is float fltVal)
+                    return (decimal)fltVal;
+                if (val is int intVal)
+                    return (decimal)intVal;
+                if (val is long longVal)
+                    return (decimal)longVal;
+                if (val is string strVal && decimal.TryParse(strVal, NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out var d))
+                    return d;
+            }
+            return 0;
+        }
+
+        private static DateTime GetDate(Dictionary<string, object> dict, string key)
+        {
+            if (dict.TryGetValue(key, out var val) && val != null)
+            {
+                if (val is DateTime dtVal)
+                    return dtVal;
+                if (val is string strVal && DateTime.TryParse(strVal, out var d))
+                    return d;
+            }
+            return DateTime.MinValue;
+        }
 
         /// <summary>
         /// Converts a date value from the dictionary to ISO 8601 format.
@@ -707,8 +739,10 @@ namespace OF.Generator.B2BOrder
         /// <param name="dict">The dictionary to retrieve the value from.</param>
         /// <param name="key">The key of the value to retrieve.</param>
         /// <returns>The ISO 8601 formatted date string if parseable; otherwise, an empty string.</returns>
-        private static string ToIsoDate(Dictionary<string, object> dict, string key) =>
-            DateTime.TryParse(Get(dict, key), out var dt) ? dt.ToString("s") : string.Empty;
+        private static string ToIsoDate(Dictionary<string, object> dict, string key)
+        {
+            return GetDate(dict,key).ToString("s");
+        }
 
         /// <summary>
         /// Converts a decimal value from the dictionary to a string using invariant culture.
@@ -716,10 +750,14 @@ namespace OF.Generator.B2BOrder
         /// <param name="dict">The dictionary to retrieve the value from.</param>
         /// <param name="key">The key of the value to retrieve.</param>
         /// <returns>The decimal value as a string if parseable; otherwise, an empty string.</returns>
-        private static string ToDecimal(Dictionary<string, object> dict, string key) =>
-            decimal.TryParse(Get(dict, key), NumberStyles.Any, CultureInfo.InvariantCulture, out var val) ? val.ToString(CultureInfo.InvariantCulture) : string.Empty;
+        private static string ToDecimal(Dictionary<string, object> dict, string key)
+        {
+            var s = GetDecimal(dict,key).ToString(CultureInfo.InvariantCulture); 
+            
+            return s;
+        }
 
-        /// <summary>
+        /// <summary>.
         /// Converts an integer value from the dictionary to a string.
         /// </summary>
         /// <param name="dict">The dictionary to retrieve the value from.</param>

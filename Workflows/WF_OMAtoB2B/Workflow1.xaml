@@ -33,6 +33,7 @@
       <AssemblyReference>Microsoft.CodeAnalysis.CSharp.Scripting</AssemblyReference>
       <AssemblyReference>Microsoft.CodeAnalysis.Scripting</AssemblyReference>
       <AssemblyReference>Microsoft.CSharp</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
       <AssemblyReference>System</AssemblyReference>
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>System.AppContext</AssemblyReference>
@@ -40,51 +41,30 @@
       <AssemblyReference>System.Collections.Immutable</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>System.Configuration</AssemblyReference>
-      <AssemblyReference>System.Console</AssemblyReference>
       <AssemblyReference>System.Core</AssemblyReference>
       <AssemblyReference>System.Data</AssemblyReference>
-      <AssemblyReference>System.Diagnostics.FileVersionInfo</AssemblyReference>
-      <AssemblyReference>System.Diagnostics.StackTrace</AssemblyReference>
-      <AssemblyReference>System.IO</AssemblyReference>
-      <AssemblyReference>System.IO.Compression</AssemblyReference>
-      <AssemblyReference>System.IO.FileSystem</AssemblyReference>
-      <AssemblyReference>System.IO.FileSystem.Primitives</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
       <AssemblyReference>System.Memory</AssemblyReference>
       <AssemblyReference>System.Numerics</AssemblyReference>
       <AssemblyReference>System.Numerics.Vectors</AssemblyReference>
-      <AssemblyReference>System.Reflection</AssemblyReference>
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
-      <AssemblyReference>System.Runtime</AssemblyReference>
       <AssemblyReference>System.Runtime.CompilerServices.Unsafe</AssemblyReference>
-      <AssemblyReference>System.Runtime.Extensions</AssemblyReference>
-      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
-      <AssemblyReference>System.Security.Cryptography.Algorithms</AssemblyReference>
-      <AssemblyReference>System.Security.Cryptography.Encoding</AssemblyReference>
-      <AssemblyReference>System.Security.Cryptography.Primitives</AssemblyReference>
-      <AssemblyReference>System.Security.Cryptography.X509Certificates</AssemblyReference>
       <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
       <AssemblyReference>System.Text.Encoding.CodePages</AssemblyReference>
       <AssemblyReference>System.Threading.Tasks.Extensions</AssemblyReference>
-      <AssemblyReference>System.Threading.Thread</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>System.Web</AssemblyReference>
       <AssemblyReference>System.Xaml</AssemblyReference>
       <AssemblyReference>System.Xml</AssemblyReference>
       <AssemblyReference>System.Xml.Linq</AssemblyReference>
-      <AssemblyReference>System.Xml.ReaderWriter</AssemblyReference>
-      <AssemblyReference>System.Xml.XmlDocument</AssemblyReference>
-      <AssemblyReference>System.Xml.XPath</AssemblyReference>
-      <AssemblyReference>System.Xml.XPath.XDocument</AssemblyReference>
+      <AssemblyReference>OF.Adapter.GetFTP</AssemblyReference>
+      <AssemblyReference>OF.Adapter.SendFTP</AssemblyReference>
+      <AssemblyReference>OF.Generator.B2BOrder</AssemblyReference>
       <AssemblyReference>OF.Parser.VCA</AssemblyReference>
       <AssemblyReference>OF.Transformation.RuleEngine</AssemblyReference>
       <AssemblyReference>OF.Module</AssemblyReference>
-      <AssemblyReference>System.Drawing</AssemblyReference>
-      <AssemblyReference>OF.Adapter.GetFTP</AssemblyReference>
-      <AssemblyReference>OF.Adapter.SendFTP</AssemblyReference>
-      <AssemblyReference>PresentationFramework</AssemblyReference>
-      <AssemblyReference>OF.Generator.B2BOrder</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
       <AssemblyReference>System.Core</AssemblyReference>
       <AssemblyReference>WF_OMAtoB2B</AssemblyReference>
@@ -110,7 +90,12 @@
           <Variable x:TypeArguments="x:String" Name="message" />
           <Variable x:TypeArguments="x:String" Name="MID" />
         </Sequence.Variables>
-        <oag:GetFTP MID="{x:Null}" FTPServer="ftp://preislistendruck.de" sap2010:WorkflowViewState.IdRef="GetFTP_1" MsgExtension="VCA" Password="flow!1Opti" RenameWhenDone="bak" Username="OptiFlow" WFID="TEST">
+        <oag:GetFTP MID="{x:Null}" sap2010:WorkflowViewState.IdRef="GetFTP_1" MsgExtension="VCA" RenameWhenDone="bak" WFID="TEST">
+          <oag:GetFTP.FTPServer>
+            <InArgument x:TypeArguments="x:String">
+              <mca:CSharpValue x:TypeArguments="x:String">Properties.Settings.Default.FTP_Server</mca:CSharpValue>
+            </InArgument>
+          </oag:GetFTP.FTPServer>
           <oag:GetFTP.Filename>
             <OutArgument x:TypeArguments="x:String">
               <mca:CSharpReference x:TypeArguments="x:String">filename</mca:CSharpReference>
@@ -121,6 +106,11 @@
               <mca:CSharpReference x:TypeArguments="x:String">message</mca:CSharpReference>
             </OutArgument>
           </oag:GetFTP.Message>
+          <oag:GetFTP.Password>
+            <InArgument x:TypeArguments="x:String">
+              <mca:CSharpValue x:TypeArguments="x:String">Properties.Settings.Default.FTP_Password</mca:CSharpValue>
+            </InArgument>
+          </oag:GetFTP.Password>
           <oag:GetFTP.Result>
             <OutArgument x:TypeArguments="x:Int32">
               <mca:CSharpReference x:TypeArguments="x:Int32">NoOfItems</mca:CSharpReference>
@@ -128,9 +118,14 @@
           </oag:GetFTP.Result>
           <oag:GetFTP.Subdir>
             <InArgument x:TypeArguments="x:String">
-              <Literal x:TypeArguments="x:String" Value="" />
+              <mca:CSharpValue x:TypeArguments="x:String">Properties.Settings.Default.FTP_InDir</mca:CSharpValue>
             </InArgument>
           </oag:GetFTP.Subdir>
+          <oag:GetFTP.Username>
+            <InArgument x:TypeArguments="x:String">
+              <mca:CSharpValue x:TypeArguments="x:String">Properties.Settings.Default.FTP_User</mca:CSharpValue>
+            </InArgument>
+          </oag:GetFTP.Username>
         </oag:GetFTP>
         <If sap2010:WorkflowViewState.IdRef="If_1">
           <If.Condition>
@@ -184,7 +179,12 @@
                   </OutArgument>
                 </ogb:CB2BOrder.OrderXML>
               </ogb:CB2BOrder>
-              <oas:SendFTP Subdir="{x:Null}" FTPServer="ftp://preislistendruck.de" sap2010:WorkflowViewState.IdRef="SendFTP_1" Password="flow!1Opti" Username="optiflow" WFID="TEST">
+              <oas:SendFTP sap2010:WorkflowViewState.IdRef="SendFTP_1" WFID="TEST">
+                <oas:SendFTP.FTPServer>
+                  <InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String">Properties.Settings.Default.FTP_Server</mca:CSharpValue>
+                  </InArgument>
+                </oas:SendFTP.FTPServer>
                 <oas:SendFTP.Filename>
                   <InArgument x:TypeArguments="x:String">
                     <mca:CSharpValue x:TypeArguments="x:String">filename + ".xml"</mca:CSharpValue>
@@ -195,13 +195,28 @@
                     <mca:CSharpValue x:TypeArguments="x:String">b2bxml</mca:CSharpValue>
                   </InArgument>
                 </oas:SendFTP.Message>
+                <oas:SendFTP.Password>
+                  <InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String">Properties.Settings.Default.FTP_Password</mca:CSharpValue>
+                  </InArgument>
+                </oas:SendFTP.Password>
+                <oas:SendFTP.Subdir>
+                  <InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String">Properties.Settings.Default.FTP_OutDir</mca:CSharpValue>
+                  </InArgument>
+                </oas:SendFTP.Subdir>
+                <oas:SendFTP.Username>
+                  <InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String">Properties.Settings.Default.FTP_User</mca:CSharpValue>
+                  </InArgument>
+                </oas:SendFTP.Username>
               </oas:SendFTP>
             </Sequence>
           </If.Then>
         </If>
       </Sequence>
     </DoWhile>
-    <sads:DebugSymbol.Symbol>d0NDOlxVc2Vyc1xFbnR3aVxzb3VyY2VccmVwb3NcSVRLLk9wdGlGbG93XFdGX0IyQnRvT01BXFdvcmtmbG93MS54YW1sKV0DzQEOAgEBYgtiaAIBA2UzZTYCAQJnBcsBDwIBB2kJaVYDAYMBawfKARICAQhxCYYBFgIBZocBCckBDgIBCXGtAXGyAQMBggFxLnFJAwGBAYMBD4MBPgMBgAF5D3lcAgF5cYIBcYcBAgF4dA90XQIBcXG8AXHGAQIBcH4Pfl0CAWlxkQFxnQECAWhxzAFx0gECAWeKAQ+KAV0CAQqOAQ3HARgCARGSAQ+iASACAUyjAQ+uASACATmvAQ+6AR8CASe7AQ/GAR0CARKVARWVAVsCAV6fARWfAWoCAVaaARWaAVoCAU6SAVOSAVkCAU2jAYsBowGVAQIBS6sBFasBbQIBQ6YBFaYBagIBO6MBmwGjAaEBAgE6twEVtwFhAgExsgEVsgFiAgEprwFRrwFXAgEouwE4uwFTAgEmwwEVwwFZAgEevgEVvgFkAgEWuwGfAbsBqQECARW7AYkBuwGVAQIBFLsBrwG7AbUBAgET</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d01DOlxVc2Vyc1xFbnR3aVxzb3VyY2VccmVwb3NcSVRLLk9wdGlGbG93XFdvcmtmbG93c1xXRl9PTUF0b0IyQlxXb3JrZmxvdzEueGFtbCpJA9wBDgIBAU4LTmgCAQNRM1E2AgECUwXaAQ8CAQdVCVVWAwG4AVcH2QESAgEIXQmBARYDAYMBggEJ2AEOAgEJXXFddgMBtwFgD2BzAwGwAXkPeXIDAakBag9qXAMBogFdXF1hAwGhAWUPZV0DAZoBfg9+cQMBkwF0D3RdAwGMAW8Pb3UDAYUBXXxdggEDAYQBhQEPhQFdAgEKiQEN1gEYAgERjQEPnQEgAgFpngEPqQEgAgFWqgEPtQEfAgFEtgEP1QEdAgESkAEVkAFbAgF7mgEVmgFqAgFzlQEVlQFaAgFrjQFTjQFZAgFqngGLAZ4BlQECAWimARWmAW0CAWChARWhAWoCAVieAZsBngGhAQIBV7IBFbIBYQIBTq0BFa0BYgIBRqoBUaoBVwIBRbkBFbkBeQIBPM0BFc0BeQIBNMMBFcMBWQIBLL4BFb4BZAIBJNIBFdIBdwIBHMgBFcgBewIBFLYBTbYBUwIBEw==</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>

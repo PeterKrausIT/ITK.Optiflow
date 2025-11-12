@@ -20,6 +20,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OF.Module;
 using System;
 using System.Activities;
 using System.Collections.Generic;
@@ -112,12 +113,16 @@ namespace UnitTestB2BOrder
             Order.SetValue("FUPC", "72527273070");
             Order.SetValue("FCRV", (decimal)40);
 
+            OF.Module.OrderDictionary Orders = new OF.Module.OrderDictionary();
+            OF.Module.OrderDictionary[] OrderArr = new OF.Module.OrderDictionary[1];
+            OrderArr[0] = Order;
+            Orders.SetValue("PairOrders", OrderArr);
 
             OF.Generator.B2BOrder.CB2BOrder B2BGen = new OF.Generator.B2BOrder.CB2BOrder();
 
             var inputGenerator = new Dictionary<string, object>
             {
-                {"Order", Order }
+                {"Order", Orders }
             };
 
             IDictionary<string, object> outputGenerator = new Dictionary<string, object>
