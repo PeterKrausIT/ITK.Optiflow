@@ -537,9 +537,11 @@ namespace OF.Generator.B2BOrder
             // b2boptic → items → item → pair → edging → edgingType
             // from dictionary we get _EDGINGTYPE (string) with the same values as above
             // provided by rules if needed.
-            var edgingType = ElemIf("edgingType", Get(dict, "_EDGINGTYPE"));
-            if (edgingType != null)
-                edging.Add(edgingType);
+            var edgingTypeValue = Get(dict, "_EDGINGTYPE");
+            if (!string.IsNullOrWhiteSpace(edgingTypeValue))
+            {
+                edging.SetAttributeValue("edgingType", edgingTypeValue);
+            }
 
 
             // add bevel type.
